@@ -1,9 +1,11 @@
-from src.masks import get_mask_account, get_mask_card_number
 import re
 from datetime import datetime
 
+from src.masks import get_mask_account, get_mask_card_number
+
+
 def mask_account_card(user_bank_data: str) -> str:
-    """Функция принимает информацию от пользователя о номере банковского счета или карты в виде строки и возвращает замаскированные банковские данные"""
+    """Функция принимает № банковского счета или карты и возвращает в замаскированном виде"""
     result = re.findall(r"[0-9]+", user_bank_data)
     bank_number = "".join(result)
     if user_bank_data.lower().strip().startswith("счет"):
@@ -18,8 +20,7 @@ def mask_account_card(user_bank_data: str) -> str:
 
 
 def get_date(date_iso: str) -> str:
-    """Функция принимает строку с датой в формате <2024-03-11T02:26:18.671407> и возвращает строку с датой в формате
-<ДД.ММ.ГГГГ>"""
+    """Функция принимает дату в формате <2024-03-11T02:26:18.671407> и возвращает формат <ДД.ММ.ГГГГ>"""
     date_object = datetime.fromisoformat(date_iso)
     norm_date = date_object.strftime("%d.%m.%Y")
     return norm_date
