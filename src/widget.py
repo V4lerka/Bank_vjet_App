@@ -1,5 +1,6 @@
 from src.masks import get_mask_account, get_mask_card_number
 import re
+from datetime import datetime
 
 def mask_account_card(user_bank_data: str) -> str:
     """Функция принимает информацию от пользователя о номере банковского счета или карты в виде строки и возвращает замаскированные банковские данные"""
@@ -14,3 +15,11 @@ def mask_account_card(user_bank_data: str) -> str:
         card_name = " ".join(result)
         masked_bank_data = f"{card_name} {masked_number}"
     return masked_bank_data
+
+
+def get_date(date_iso: str) -> str:
+    """Функция принимает строку с датой в формате <2024-03-11T02:26:18.671407> и возвращает строку с датой в формате
+<ДД.ММ.ГГГГ>"""
+    date_object = datetime.fromisoformat(date_iso)
+    norm_date = date_object.strftime("%d.%m.%Y")
+    return norm_date
