@@ -8,7 +8,7 @@ def get_mask_card_number(user_card_number: str) -> str:
         mask_card_number = "Вы ничего не ввели"
     elif user_card_number.strip().isdigit() and len(user_card_number.strip()) == 16:
         mask_card_number = " ".join(
-            [user_card_number.strip()[:4], f"{user_card_number[4:6]}**", "****", user_card_number[12:]]
+            [user_card_number.strip()[:4], f"{user_card_number.strip()[4:6]}**", "****", user_card_number.strip()[12:]]
         )
     else:
         mask_card_number = "Непредвиденная ошибка ввода. Повторите ввод"
