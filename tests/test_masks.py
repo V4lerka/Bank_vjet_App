@@ -16,7 +16,6 @@ def test_get_mask_card_number_empty(empty_number):
                                                     "Номер карты должен содержать ровно 16 цифр, вы ввели 12"),
                                                    ("2", "Номер карты должен содержать ровно 16 цифр, вы ввели 1")
                                                    ])
-
 def test_get_mask_card_number_rest_cases(card_number, expected):
     assert get_mask_card_number(card_number) == expected
 
@@ -27,3 +26,15 @@ def test_get_mask_account_wrong(wrong_numbers):
 
 def test_get_mask_account_empty(empty_number):
     assert get_mask_account(empty_number) == "Вы ничего не ввели"
+
+
+@pytest.mark.parametrize("account_number, expected", [("5456", "5456"),
+                                                      (" 5456 ", "5456"),
+                                                      ("234",
+                                                       "Номер счета слишком короткий. Минимальная длина 4 цифры"),
+                                                      ("65321", "*5321"),
+                                                      ("653212", "**3212"),
+                                                      (" 653212 ", "**3212")
+                                                      ])
+def get_mask_account_rest_cases(account_number, expected):
+    assert get_mask_account(account_number) == expected
