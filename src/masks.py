@@ -1,7 +1,7 @@
 def get_mask_card_number(user_card_number: str) -> str:
     """Функция маскирует номер банковской карты"""
     if user_card_number.strip().isdigit() and len(user_card_number.strip()) != 16:
-        mask_card_number = f"Номер карты должен содержать ровно 16 цифр, вы ввели {len(user_card_number)}"
+        mask_card_number = f"Номер карты должен содержать ровно 16 цифр, вы ввели {len(user_card_number.strip())}"
     elif not user_card_number.strip().isdigit() and len(user_card_number.strip()) != 0:
         mask_card_number = "Номер карты должен содержать только цифры, к тому же без пробелов"
     elif user_card_number.strip() == "":
