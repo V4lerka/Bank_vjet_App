@@ -5,13 +5,21 @@ def filter_by_state(list_operations: list[dict[str, Any]], state: str = "EXECUTE
     """Функция принимает список словарей и опционально значение для ключа state (по умолчанию
     'EXECUTED') и возвращает новый список тех словарей, у которых ключ state соответствует указанному"""
     filtered_operations = []
+    operations_without_state = []
     for operation in list_operations:
         if operation.get("state") == state:
             filtered_operations.append(operation)
+        elif operation.get("state") is None:
+            operations_without_state.append(operation)
+    if len(filtered_operations) == 0:
+        raise Exception(f"Все операции не имеют статуса")
+    if len(operations_without_state) > 0:
+        raise Exception(
+            f"Операции в количестве {len(operations_without_state)} шт. не имеют статуса. Список операций со статусом: {filtered_operations}")
     return filtered_operations
 
 
-def sort_by_date(list_operations: list[dict[str, Any]], descending_order: bool = True) -> list[dict[str, Any]]:
+def sort_by_date(lifst_operations: list[dict[str, Any]], descending_order: bool = True) -> list[dict[str, Any]]:
     """Функция принимает список словарей и параметр, задающий порядок сортировки (по умолчанию — убывание)
     и возвращает новый список, отсортированный по дате (date)"""
     sorted_operations: list[dict[str, Any]] = []

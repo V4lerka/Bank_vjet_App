@@ -24,5 +24,5 @@ for item in test_data:
     print(result_bank_data)
 
 print(get_date("2024-03-11T02:26:18.7698"))
-print(filter_by_state(list_operations_test, "CANCELED"))
+print(filter_by_state(list_operations_test, "EXECUTED"))
 print(sort_by_date(list_operations_test, False))

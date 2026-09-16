@@ -26,6 +26,5 @@ def get_date(date_iso: str) -> str:
     result = re.findall(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}", date_iso.strip())
     if result:
         date_object = datetime.fromisoformat(date_iso)
-        norm_date = date_object.strftime("%d.%m.%Y")
-        return norm_date
+        return date_object.strftime("%d.%m.%Y")
     return "Формат даты не соответсвует ISO YYYY-MM-ddThh:mm:ss"
