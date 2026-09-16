@@ -23,6 +23,6 @@ for item in test_data:
     result_bank_data = mask_account_card(item)
     print(result_bank_data)
 
-print(get_date("2024-03-11T02:26:18.671407"))
+print(get_date("2024-03-11T02:26:18.7698"))
 print(filter_by_state(list_operations_test, "CANCELED"))
 print(sort_by_date(list_operations_test, False))

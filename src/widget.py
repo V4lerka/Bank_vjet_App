@@ -21,6 +21,11 @@ def mask_account_card(user_bank_data: str) -> str:
 
 def get_date(date_iso: str) -> str:
     """Функция принимает дату в формате <2024-03-11T02:26:18.671407> и возвращает формат <ДД.ММ.ГГГГ>"""
-    date_object = datetime.fromisoformat(date_iso)
-    norm_date = date_object.strftime("%d.%m.%Y")
-    return norm_date
+    if len(date_iso.strip()) == 0:
+        raise Exception("Дата отсутствует")
+    result = re.findall(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}", date_iso.strip())
+    if result:
+        date_object = datetime.fromisoformat(date_iso)
+        norm_date = date_object.strftime("%d.%m.%Y")
+        return norm_date
+    return "Формат даты не соответсвует ISO YYYY-MM-ddThh:mm:ss"

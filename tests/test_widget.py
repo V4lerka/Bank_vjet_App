@@ -25,3 +25,14 @@ def test_mask_account_card_success(bank_user_data, expected):
 def test_mask_account_card_bad_case(invalid_bank_data):
     with pytest.raises(Exception):
         mask_account_card(invalid_bank_data)
+
+def test_get_date_iso():
+    assert get_date("2018-10-14T08:21:33.419441") == "14.10.2018"
+
+def test_get_date_not_iso():
+    assert get_date("2018-10-14") == "Формат даты не соответсвует ISO YYYY-MM-ddThh:mm:ss"
+
+def test_get_date_empty():
+    with pytest.raises(Exception) as e:
+        get_date(" ")
+    assert str(e.value) == "Дата отсутствует"

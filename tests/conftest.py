@@ -27,7 +27,7 @@ def big_len():
     return "576897535467458997897886"
 
 
-@pytest.fixture(params=["visa gold 4688", "счет123 ", "visa ", "Счет №   ", "Mastercard 45679c3434r3434g1234",
+@pytest.fixture(params=["visa gold 4688", "счет123#", "visa ", "Счет №   ", "Mastercard 456?343;343!1230",
                         "Сч. 1234 5445", "Visa Gold 468823454549045678912345", "   ", 12345556
                         ])
 def invalid_bank_data(request):
