@@ -11,7 +11,8 @@ def get_mask_card_number(user_card_number: str) -> str:
     elif user_card_number.strip() == "":
         raise Exception("Вы ничего не ввели")
     return " ".join(
-        [user_card_number.strip()[:4], f"{user_card_number.strip()[4:6]}**", "****", user_card_number.strip()[12:]])
+        [user_card_number.strip()[:4], f"{user_card_number.strip()[4:6]}**", "****", user_card_number.strip()[12:]]
+    )
 
 
 def get_mask_account(user_account_number: str) -> str:
