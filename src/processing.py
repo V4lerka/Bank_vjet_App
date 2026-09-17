@@ -1,4 +1,5 @@
 from typing import Any
+import re
 
 
 def filter_by_state(list_operations: list[dict[str, Any]], state: str = "EXECUTED") -> list[dict[str, Any]]:
@@ -19,18 +20,31 @@ def filter_by_state(list_operations: list[dict[str, Any]], state: str = "EXECUTE
     return filtered_operations
 
 
-def sort_by_date(lifst_operations: list[dict[str, Any]], descending_order: bool = True) -> list[dict[str, Any]]:
+def sort_by_date(list_operations: list[dict[str, Any]], descending_order: bool = True) -> list[dict[str, Any]]:
     """Функция принимает список словарей и параметр, задающий порядок сортировки (по умолчанию — убывание)
     и возвращает новый список, отсортированный по дате (date)"""
     sorted_operations: list[dict[str, Any]] = []
     new_list_operations: list[dict[str, Any]] = []
+    new_list_operations_without_date: list[dict[str, Any]] = []
     for operation in list_operations:
         if operation.get("date") is not None:
-            new_list_operations.append(operation)
+            parse_iso_data = re.findall(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", operation.get("date"))
+            if parse_iso_data:
+                new_list_operations.append(operation)
+        elif operation.get("date") is None:
+            new_list_operations_without_date.append(operation)
     if len(new_list_operations) == 0:
         return sorted_operations
-    elif descending_order:
+    elif descending_order and len(new_list_operations) == len(list_operations):
         sorted_operations = sorted(new_list_operations, key=lambda operations: operations["date"], reverse=True)
-    elif not descending_order:
+    elif not descending_order and len(new_list_operations) == len(list_operations):
         sorted_operations = sorted(new_list_operations, key=lambda operations: operations["date"])
+    elif descending_order and len(new_list_operations) < len(list_operations):
+        sorted_operations = sorted(new_list_operations, key=lambda operations: operations["date"], reverse=True)
+        updated_sorted_operations = sorted_operations + new_list_operations_without_date
+        return updated_sorted_operations
+    elif not descending_order and len(new_list_operations) < len(list_operations):
+        sorted_operations = sorted(new_list_operations, key=lambda operations: operations["date"])
+        updated_sorted_operations = sorted_operations + new_list_operations_without_date
+        return updated_sorted_operations
     return sorted_operations
