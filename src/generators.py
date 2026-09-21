@@ -7,8 +7,11 @@ def filter_by_currency(list_transactions: list[dict[str, Any]], currency: str) -
     if len(list_transactions) == 0:
         yield {}
     elif len(list_transactions) > 0:
-        currency_list = [transaction.get("operationAmount").get("currency").get("code") for transaction in
-                         list_transactions if transaction.get("operationAmount").get("currency") is not None]
+        currency_list = [
+            transaction.get("operationAmount").get("currency").get("code")
+            for transaction in list_transactions
+            if transaction.get("operationAmount").get("currency") is not None
+        ]
         if currency not in currency_list:
             raise Exception(f"Операции с валютой {currency} не обнаружены")
         for transaction in list_transactions:
@@ -35,6 +38,5 @@ def card_number_generator(start: int, stop: int) -> Generator[str]:
     for i in range(start, stop):
         num_str = str(i)
         card_number = "0" * (16 - len(num_str)) + num_str
-        four_groups = [card_number[4*n:4*(n+1)] for n in range(4)]
+        four_groups = [card_number[4 * n : 4 * (n + 1)] for n in range(4)]
         yield " ".join(four_groups)
-
