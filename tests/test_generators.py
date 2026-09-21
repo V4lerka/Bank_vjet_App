@@ -1,5 +1,5 @@
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 from tests.conftest import list_of_transactions
 
 
@@ -36,6 +36,7 @@ def test_filter_by_currency(list_of_transactions):
         "to": "Счет 14211924144426031657"
     }
 
+
 def test_filter_by_currency_empty():
     generator = filter_by_currency([], "RUB")
     assert next(generator) == {}
@@ -62,3 +63,16 @@ def test_transaction_descriptions_empty():
     assert next(generator) == "Транзакции не найдены"
 
 
+def test_card_number_generator1():
+    generator = card_number_generator(1,  5)
+    assert next(generator) == "0000 0000 0000 0001"
+    assert next(generator) == "0000 0000 0000 0002"
+    assert next(generator) == "0000 0000 0000 0003"
+    assert next(generator) == "0000 0000 0000 0004"
+
+def test_card_number_generator2():
+    generator = card_number_generator(2344_5999_9989_9990,  2344_5999_9989_9999)
+    assert next(generator) == "2344 5999 9989 9990"
+    assert next(generator) == "2344 5999 9989 9991"
+    assert next(generator) == "2344 5999 9989 9992"
+    assert next(generator) == "2344 5999 9989 9993"
