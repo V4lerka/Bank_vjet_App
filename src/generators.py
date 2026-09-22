@@ -35,7 +35,7 @@ def transaction_descriptions(list_transactions: list[dict[str, Any]]) -> Generat
 
 def card_number_generator(start: int, stop: int) -> Generator[str]:
     """Функция-генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX при заданном диапазоне генерации"""
-    for i in range(start, stop):
+    for i in range(start, stop+1):
         num_str = str(i)
         card_number = "0" * (16 - len(num_str)) + num_str
         four_groups = [card_number[4 * n : 4 * (n + 1)] for n in range(4)]
