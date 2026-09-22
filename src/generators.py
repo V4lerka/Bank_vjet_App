@@ -1,7 +1,8 @@
-from typing import Any, Generator
+from typing import Generator, Any
 
 
-def filter_by_currency(list_transactions: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any]]:
+def filter_by_currency(list_transactions: list[dict[str, Any]], currency: str) -> Generator[
+    dict[str, Any]]:
     """Функция принимает на вход список словарей, представляющих транзакции, и возвращает итератор, который поочередно
     выдает транзакции, где валюта операции соответствует заданной"""
     if len(list_transactions) == 0:
@@ -34,9 +35,10 @@ def transaction_descriptions(list_transactions: list[dict[str, Any]]) -> Generat
 
 
 def card_number_generator(start: int, stop: int) -> Generator[str]:
-    """Функция-генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX при заданном диапазоне генерации"""
-    for i in range(start, stop+1):
+    """Функция-генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX при заданном
+    диапазоне генерации"""
+    for i in range(start, stop + 1):
         num_str = str(i)
         card_number = "0" * (16 - len(num_str)) + num_str
-        four_groups = [card_number[4 * n : 4 * (n + 1)] for n in range(4)]
+        four_groups = [card_number[4 * n: 4 * (n + 1)] for n in range(4)]
         yield " ".join(four_groups)
