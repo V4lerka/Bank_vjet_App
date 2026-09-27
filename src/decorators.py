@@ -1,6 +1,7 @@
-from time import time, ctime
-from functools import wraps
 import os
+from functools import wraps
+from time import ctime, time
+
 
 def log(filename=None):
     def wrapper(func):
@@ -20,10 +21,12 @@ def log(filename=None):
                         file.write(log_info + "\n")
                 raise Exception(e)
             else:
-                log_info = (f"Time: {ctime(start_time)}. "
-                            f"Function {func.__name__} is OK. "
-                            f"Inputs: {args}, {kwargs}. Elapsed time: {end_time - start_time:.2f} sec. "
-                            f"Result: {result}")
+                log_info = (
+                    f"Time: {ctime(start_time)}. "
+                    f"Function {func.__name__} is OK. "
+                    f"Inputs: {args}, {kwargs}. Elapsed time: {end_time - start_time:.2f} sec. "
+                    f"Result: {result}"
+                )
                 if filename is None:
                     print(log_info)
                 else:
@@ -40,5 +43,6 @@ def log(filename=None):
 @log(filename="log")
 def foo(a, b):
     return a / b
+
 
 print(foo(2, 3))
