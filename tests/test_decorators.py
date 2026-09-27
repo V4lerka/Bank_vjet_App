@@ -44,7 +44,9 @@ def test_log_file_creation():
         assert os.path.exists("../test_log.txt"), "Log file was not created!"
         with open("../test_log.txt", 'r') as file:
             content = file.read()
-            assert f"Time: {ctime(src.decorators.start_time)}. Function foo is OK. Inputs: {x, y}, {empty}. Elapsed time: {src.decorators.end_time - src.decorators.start_time:.7f} sec. Result: {x + y}\n" in content
+            assert (f"Time: {ctime(src.decorators.start_time)}. Function foo is OK. Inputs: {x, y}, {empty}. "
+                    f"Elapsed time: {src.decorators.end_time - src.decorators.start_time:.7f} sec. "
+                    f"Result: {x + y}\n") in content
 
 def test_log_file_creation2():
     x, y = 2, 0
