@@ -1,4 +1,5 @@
 import pytest
+import src.decorators
 from src.decorators import log
 from time import time, ctime
 import os
@@ -13,7 +14,7 @@ def test_log_except(capsys):
     with pytest.raises(Exception, match="division by zero"):
         foo(x, y)
         captured = capsys.readouterr()
-        assert captured.out == f"Time: {ctime(time())}. Function foo error: division by zero. Inputs: {x}, {y}\n"
+        assert captured.out == f"Time: {ctime(src.decorators.start_time)}. Function foo error: division by zero. Inputs: {x}, {y}\n"
 
 
 def test_log_success(capsys):
@@ -24,13 +25,12 @@ def test_log_success(capsys):
     def foo(a, b):
         return a, b
 
-    start = time()
+
     foo(x, y)
-    end = time()
     captured = capsys.readouterr()
-    assert captured.out == (f"Time: {ctime(time())}. Function foo is OK. "
+    assert captured.out == (f"Time: {ctime(src.decorators.start_time)}. Function foo is OK. "
                             f"Inputs: {x, y}, {empty}. "
-                            f"Elapsed time: {end - start:.2f} sec. Result: {x, y}\n")
+                            f"Elapsed time: {src.decorators.end_time - src.decorators.start_time:.7f} sec. Result: {x, y}\n")
 
 def test_log_file_creation():
         empty = {}
@@ -39,14 +39,12 @@ def test_log_file_creation():
         def foo(a, b):
             return a + b
 
-        start = time()
-        foo(x, y)
-        end = time()
 
+        foo(x, y)
         assert os.path.exists("../test_log.txt"), "Log file was not created!"
         with open("../test_log.txt", 'r') as file:
             content = file.read()
-            assert f"Time: {ctime(time())}. Function foo is OK. Inputs: {x, y}, {empty}. Elapsed time: {end - start:.2f} sec. Result: {x + y}\n" in content
+            assert f"Time: {ctime(src.decorators.start_time)}. Function foo is OK. Inputs: {x, y}, {empty}. Elapsed time: {src.decorators.end_time - src.decorators.start_time:.7f} sec. Result: {x + y}\n" in content
 
 def test_log_file_creation2():
     x, y = 2, 0
