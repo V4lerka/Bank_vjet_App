@@ -1,4 +1,4 @@
-from typing import Generator, Any
+from typing import Any, Generator
 
 
 def filter_by_currency(list_transactions: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any]]:
@@ -39,5 +39,5 @@ def card_number_generator(start: int, stop: int) -> Generator[str]:
     for i in range(start, stop + 1):
         num_str = str(i)
         card_number = "0" * (16 - len(num_str)) + num_str
-        four_groups = [card_number[4 * n: 4 * (n + 1)] for n in range(4)]
+        four_groups = [card_number[4 * n : 4 * (n + 1)] for n in range(4)]
         yield " ".join(four_groups)
