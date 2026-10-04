@@ -162,3 +162,147 @@ def list_of_transactions():
             "to": "Счет 14211924144426031657"
         }
     ]
+
+
+@pytest.fixture
+def not_json_transactions():
+    return [{
+        'id': 594226727,
+        'state': 'CANCELED',
+        'date': '2018-09-12T21:27:25.241689',
+        'operationAmount': {
+            'amount': '67314.70',
+            'currency': {
+                'name': 'руб.',
+                'code': 'RUB'
+            }}},
+        {
+            'id': 590026727,
+            'state': 'EXECUTED',
+            'date': '2019-09-12T21:27:25.241689',
+            'operationAmount': {
+                'amount': '1731.70',
+                'currency': {
+                    'name': 'EUR',
+                    'code': 'EUR'
+                }}}
+    ]
+
+
+@pytest.fixture
+def json_transactions():
+    return [
+        {
+            "id": 441945886,
+            "state": "EXECUTED",
+            "date": "2019-08-26T10:50:58.294041",
+            "operationAmount": {
+                "amount": "31957.58",
+                "currency": {
+                    "name": "руб.",
+                    "code": "RUB"
+                }
+            },
+            "description": "Перевод организации",
+            "from": "Maestro 1596837868705199",
+            "to": "Счет 64686473678894779589"
+        },
+        {
+            "id": 41428829,
+            "state": "EXECUTED",
+            "date": "2019-07-03T18:35:29.512364",
+            "operationAmount": {
+                "amount": "8221.37",
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"
+                }
+            },
+            "description": "Перевод организации",
+            "from": "MasterCard 7158300734726758",
+            "to": "Счет 35383033474447895560"
+        }]
+
+
+@pytest.fixture
+def not_list():
+    return {
+        "id": 41428829,
+        "state": "EXECUTED",
+        "date": "2019-07-03T18:35:29.512364",
+        "operationAmount": {
+            "amount": "8221.37",
+            "currency": {
+                "name": "USD",
+                "code": "USD"
+            }
+        },
+        "description": "Перевод организации",
+        "from": "MasterCard 7158300734726758",
+        "to": "Счет 35383033474447895560"
+    }
+
+
+@pytest.fixture
+def non_dict_transaction():
+    return [41428829, "EXECUTED", "2019-07-03T18:35:29.512364",
+            {
+                "amount": "8221.37",
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"
+                }}]
+
+
+@pytest.fixture
+def transaction_ok_usd():
+    return {
+    "id": 441945886,
+    "state": "EXECUTED",
+    "date": "2018-02-22T10:50:58.294041",
+    "operationAmount": {
+      "amount": "357.58",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "Maestro 1596837868705199",
+    "to": "Счет 64686473678894779589"
+  }
+
+@pytest.fixture
+def response_api():
+    return {
+  "date": "2018-02-22",
+  "historical": "",
+  "info": {
+    "rate": 100.0,
+    "timestamp": 1519328414
+  },
+  "query": {
+    "amount": 357.58,
+    "from": "USD",
+    "to": "RUB"
+  },
+  "result": 35758.0,
+  "success": True
+}
+
+@pytest.fixture
+def response_api_no_result():
+    return {
+  "date": "2018-02-22",
+  "historical": "",
+  "info": {
+    "rate": 100.0,
+    "timestamp": 1519328414
+  },
+  "query": {
+    "amount": 357.58,
+    "from": "USD",
+    "to": "RUB"
+  },
+  "success": False
+}
