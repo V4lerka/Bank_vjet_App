@@ -39,7 +39,7 @@ def test_convert_json_to_list4(capsys):
     result = convert_json_to_list("fake_path.json")
     assert result == []
     captured = capsys.readouterr()
-    assert captured.out == "Файл не найден по указанному пути\n"
+    assert captured.out == "Файл не найден по указанному пути.\n"
 
 
 def test_convert_json_to_list5(json_transactions):

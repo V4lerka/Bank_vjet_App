@@ -1,5 +1,5 @@
 import pytest
-
+import pandas as pd
 
 @pytest.fixture(params=["q1223g0003443443f", "card_number123456789677", "#66734998478998379858 ", " №90849040953274893",
                         "1O45090948O8355757", "4843 9034 3456 2311", "visa 1234098765431234"])
@@ -257,52 +257,60 @@ def non_dict_transaction():
 @pytest.fixture
 def transaction_ok_usd():
     return {
-    "id": 441945886,
-    "state": "EXECUTED",
-    "date": "2018-02-22T10:50:58.294041",
-    "operationAmount": {
-      "amount": "357.58",
-      "currency": {
-        "name": "USD",
-        "code": "USD"
-      }
-    },
-    "description": "Перевод организации",
-    "from": "Maestro 1596837868705199",
-    "to": "Счет 64686473678894779589"
-  }
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2018-02-22T10:50:58.294041",
+        "operationAmount": {
+            "amount": "357.58",
+            "currency": {
+                "name": "USD",
+                "code": "USD"
+            }
+        },
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589"
+    }
+
 
 @pytest.fixture
 def response_api():
     return {
-  "date": "2018-02-22",
-  "historical": "",
-  "info": {
-    "rate": 100.0,
-    "timestamp": 1519328414
-  },
-  "query": {
-    "amount": 357.58,
-    "from": "USD",
-    "to": "RUB"
-  },
-  "result": 35758.0,
-  "success": True
-}
+        "date": "2018-02-22",
+        "historical": "",
+        "info": {
+            "rate": 100.0,
+            "timestamp": 1519328414
+        },
+        "query": {
+            "amount": 357.58,
+            "from": "USD",
+            "to": "RUB"
+        },
+        "result": 35758.0,
+        "success": True
+    }
+
 
 @pytest.fixture
 def response_api_no_result():
     return {
-  "date": "2018-02-22",
-  "historical": "",
-  "info": {
-    "rate": 100.0,
-    "timestamp": 1519328414
-  },
-  "query": {
-    "amount": 357.58,
-    "from": "USD",
-    "to": "RUB"
-  },
-  "success": False
-}
+        "date": "2018-02-22",
+        "historical": "",
+        "info": {
+            "rate": 100.0,
+            "timestamp": 1519328414
+        },
+        "query": {
+            "amount": 357.58,
+            "from": "USD",
+            "to": "RUB"
+        },
+        "success": False
+    }
+
+
+@pytest.fixture
+def csv_data_ok():
+    return [{"id": "1", "amount": "100.50", "currency": "RUB"},
+        {"id": "2", "amount": "250.00", "currency": "USD"}]
