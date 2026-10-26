@@ -16,7 +16,7 @@ utils_logger.setLevel(logging.DEBUG)
 def convert_json_to_list(path: str) -> list[dict[str, Any]]:
     """Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях"""
 
-    full_path = os.path.join("../data/", f"{path}")
+    full_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data", f"{path}"))
     utils_logger.info(f"Попытка открытия файла {path}")
     try:
         with open(full_path, encoding="utf-8") as file:

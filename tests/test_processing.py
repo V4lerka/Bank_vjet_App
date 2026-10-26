@@ -17,14 +17,13 @@ def test_filter_by_state(list_of_operations, state, expected):
 def test_filter_by_state_empty(list_of_operations_without_state):
     with pytest.raises(Exception) as e:
         filter_by_state(list_of_operations_without_state)
-    assert str(e.value) == "Все операции не имеют статуса"
+    assert str(e.value) == "Все операции не имеют указанного статуса"
 
 
-def test_filter_by_state_partly_empty(list_of_operations_partly_without_state):
-    with pytest.raises(Exception) as e:
-        filter_by_state(list_of_operations_partly_without_state)
-    assert str(
-        e.value) == "Операции в количестве 2 шт. не имеют статуса. Список операций со статусом: [{'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]"
+def test_filter_by_state_partly_empty(list_of_operations_partly_without_state, capsys):
+    assert filter_by_state(list_of_operations_partly_without_state, "EXECUTED") == [{'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]
+    captured = capsys.readouterr()
+    assert captured.out == "Операции в количестве 2 шт. не имеют статуса.\n"
 
 
 @pytest.mark.parametrize("descending_order, expected",
