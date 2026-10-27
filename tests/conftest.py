@@ -1,5 +1,4 @@
 import pytest
-import pandas as pd
 
 @pytest.fixture(params=["q1223g0003443443f", "card_number123456789677", "#66734998478998379858 ", " №90849040953274893",
                         "1O45090948O8355757", "4843 9034 3456 2311", "visa 1234098765431234"])
@@ -314,3 +313,42 @@ def response_api_no_result():
 def csv_data_ok():
     return [{"id": "1", "amount": "100.50", "currency": "RUB"},
         {"id": "2", "amount": "250.00", "currency": "USD"}]
+
+@pytest.fixture
+def transactions_data():
+    return [{"id": 650703,
+                 "status": "EXECUTED",
+                 "date": "2023-09-05T11:30:32Z",
+                 "Amount": 16210,
+                 "currency_name": "Sol",
+                 "currency_code": "PEN",
+                 "from": "Счет 58803664561298323391",
+                 "to": "Счет 39745660563456619397",
+                 "description": "Перевод организации"},
+                {"id": 650703,
+                 "status": "EXECUTED",
+                 "date": "2025-09-05T11:30:32Z",
+                 "Amount": 1610,
+                 "currency_name": "RUB",
+                 "currency_code": "RUB",
+                 "from": "Счет 58803664561298323391",
+                 "to": "Счет 39745660563456619397",
+                 "description": "Оплата услуг"},
+                {"id": 650703,
+                 "status": "EXECUTED",
+                 "date": "2023-09-05T11:30:32Z",
+                 "Amount": 16210,
+                 "currency_name": "Sol",
+                 "currency_code": "PEN",
+                 "from": "Счет 58803664561298323391",
+                 "to": "Счет 39745660563456619397",
+                 "description": "Перевод организации"},
+                {"id": 650703,
+                 "status": "EXECUTED",
+                 "date": "2025-09-05T11:30:32Z",
+                 "Amount": 16010,
+                 "currency_name": "RUB",
+                 "currency_code": "RUB",
+                 "from": "Счет 58803664561298323391",
+                 "to": "Счет 39745660563456619397",
+                 "description": "Ипотека"}]

@@ -13,12 +13,10 @@ def filter_by_state(list_operations: list[dict[str, Any]], state: str = "EXECUTE
         elif operation.get("state") is None:
             operations_without_state.append(operation)
     if len(filtered_operations) == 0:
-        raise Exception("Все операции не имеют статуса")
-    if len(operations_without_state) > 0:
-        raise Exception(
-            f"Операции в количестве {len(operations_without_state)} шт. не имеют статуса. "
-            f"Список операций со статусом: {filtered_operations}"
-        )
+        raise Exception("Все операции не имеют указанного статуса")
+    elif len(operations_without_state) > 0:
+        print(f"Операции в количестве {len(operations_without_state)} шт. не имеют статуса.")
+        return filtered_operations
     return filtered_operations
 
 

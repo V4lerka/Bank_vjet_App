@@ -13,8 +13,8 @@ def mask_account_card(user_bank_data: str) -> str:
         masked_bank_data = f"Счет {masked_number}"
     else:
         masked_number = get_mask_card_number(bank_number)
-        result = re.findall(r"[A-Z][a-z]+", user_bank_data.strip())
-        card_name = " ".join(result)
+        match = re.search(r"\b([A-Za-zА-Яа-я]+)(?:\s+([A-Za-zА-Яа-я]+))?\b", user_bank_data)
+        card_name = match.group()
         masked_bank_data = f"{card_name} {masked_number}"
     return masked_bank_data
 
